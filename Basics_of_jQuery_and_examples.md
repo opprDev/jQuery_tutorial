@@ -219,4 +219,4 @@ In the case of our example, the aforementioned function composition coupled with
 
 When our document is ready, a function will be executed. That function will "tell" the div with class 'pull-me' to react to the click built-in action and, following that, the click built-in function, when executed will call yet another function, i.e., the built-in slideToggle action, that will animate our element.
 
-The final code is available inside the folder jquery_slider and it can be run [here]((https://cdn.rawgit.com/bruno-oliveira/theodinprojectExercises/master/Tips_JS_%26_jQuery/jquery_slider/index.html)).
+The final code is available inside the folder jquery_slider and it can be run [here](https://cdn.rawgit.com/bruno-oliveira/theodinprojectExercises/master/Tips_JS_%26_jQuery/jquery_slider/index.html)).
