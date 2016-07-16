@@ -114,8 +114,109 @@ As useful as selectors, both simple and compound, are, you might have realized t
 
 The this keyword refers to the jQuery object you're currently doing something with. Its complete rules are a little tricky, but the important thing to understand is if you use an event handler on an element, you can call the actual event that occurs (for eg, fadeOut()) on $(this), and the event will only affect the element you're currently doing something with (for example, clicking on or mousing over).
 
-Inside the folder using_this, you can see a working example, which you can run [here], that illustrates the desired functionality.
+Inside the folder using_this, you can see a working example, which you can run [here](https://cdn.rawgit.com/bruno-oliveira/theodinprojectExercises/master/Tips_JS_%26_jQuery/using_this/index.html), that illustrates the desired functionality.
 
 #### Short explanation of the example
 
-...
+The most important functionality of the example is the usage of the **this** jQuery object inside the script.js file, which allows, as the example shows, for the individual manipulation of objects, i.e., objects that are affected by the desired jQuery actions individually, without being dependent of belonging to a specific css class or having a specific id, which allows for much better interactivity as well as for a fine-grained application of actions to DOM elements, which is usually desired.
+
+### A full example: animating a slider with jQuery
+
+The main goal of jQuery is to allow and add, interactivity to our web applications trough easier DOM manipulation. As an illustrating example, we shall animate a slider using jQuery to put all of these concepts to use, as well as to see the capabilities of this js library.
+
+#### Part 1: The necessary (static) HTML and CSS design
+
+As this is a jQuery tutorial and not a UX/UI design tutorial, the majority of the static code will be given and the main focus will be on using jQuery to anime the elements, as such, the code below can be assumed to be given (a bit like editing an existing codebase):
+
+##### HTML code:
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Slide Panel</title>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css"></link>
+    </head>
+    <body>
+        <div class="panel">
+        <br />
+        <br />
+        <p>Now you see me!</p>
+        </div>
+        <p class="slide"><div class="pull-me">Slide Up/Down</div></p>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</html>
+```
+##### CSS code:
+```css
+body {
+    margin:0 auto;
+    padding:0;
+	width:200px;
+    text-align:center;
+}
+.pull-me{
+    -webkit-box-shadow: 0 0 8px #FFD700;
+    -moz-box-shadow: 0 0 8px #FFD700;
+    box-shadow: 0 0 8px #FFD700;
+    cursor:pointer;
+}
+.panel {
+	background: #ffffbd;
+    background-size:90% 90%;
+    height:300px;
+	display:none;
+    font-family:garamond,times-new-roman,serif;
+}
+.panel p{
+    text-align:center;
+}
+.slide {
+	margin:0;
+	padding:0;
+	border-top:solid 2px #cc0000;
+}
+.pull-me {
+	display:block;
+    position:relative;
+    right:-25px;
+    width:150px;
+    height:20px;
+	font-family:arial,sans-serif;
+    font-size:14px;
+	color:#ffffff;
+    background:#cc0000;
+	text-decoration:none;
+    -moz-border-bottom-left-radius:5px;
+    -moz-border-bottom-right-radius:5px;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+}
+.pull-me p {
+    text-align:center;
+}
+```
+
+We can see immediately, that we have defined several classes that are affecting our HTML elements, and it will be by using those classes that we will be able to apply styling and the desired effect to create a slider. Remember that it's easy to manipulate elements that belong to a specific class or have a specific id, using the jQuery selectors.
+
+#### Part 2: Understanding what we need to do and where to apply jQuery
+
+Now that we have the static parts of the code, as well as the styling, done, we can now proceed to what matters, the application of jQuery to animate the our slider.
+
+Let's firstly review the process on applying jQuery:
+
+| Code written                                 | Effect                                                    |
+|----------------------------------------------|------------------------------------------------------------|
+|  $(document).ready(**function(){}**)         | States that there jQuery will be used to manipulate our html	|
+|  **function(){ $('.pull-me').click()};**          | Div with class 'pull-me' will react to the click() event        |
+|  $('.pull-me').click(_function(){}_);          | When the div is clicked, some function will be executed              |
+|  .click(_function(){ $('.panel').slideToggle('slow')}_) | Triggers the slide action to display our panel 	|
+
+As the special formatting denotes, the most important thing in the application of jQuery to anime a specific HTML element is **function composition**. Function composition is what binds actions together, that when coupled with some of jQuery's built-in actions allows for an element to be animated. 
+
+In the case of our example, the aforementioned function composition coupled with built-in jQuery actions, works as follows:
+
+When our document is ready, a function will be executed. That function will "tell" the div with class 'pull-me' to react to the click built-in action and, following that, the click built-in function, when executed will call yet another function, i.e., the built-in slideToggle action, that will animate our element.
+
+The final code is available inside the folder jquery_slider and it can be run [here].
